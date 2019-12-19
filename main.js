@@ -15,6 +15,8 @@ function hideError() {
   console.log("hideError() called");
 }
 
+mimicServerCall();
+
 //------------------------------------------------------------------------------
 // Ignore after this point. Used only for demo purposes
 //------------------------------------------------------------------------------
