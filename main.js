@@ -1,9 +1,45 @@
 // Defining text characters for the empty and full hearts for you to use later.
 const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
+let hearts;
+
+let heartStates = {
+  '♡': '♥',
+  '♥': '♡'
+}
+
+let colorStates = {
+  "red": "",
+  "": "red"
+}
 
 // Your JavaScript code goes here!
+window.addEventListener('load', (e) => {
+  setupPage();
+});
 
+function setupPage(){
+  setupLikes();
+}
+
+function setupLikes(){
+  hearts = document.querySelectorAll(".like");
+  for (heart of hearts){
+    heart.addEventListener('click',clickLikes);
+  }
+}
+
+function clickLikes(e){
+  let heart = e.target;
+  mimicServerCall(fakeUrl)
+  .then((serverMessage) => {
+    heart.innerText = heartStates[heart.innerText];
+    heart.style.color = colorStates[heart.style.color];
+  })
+  .catch((error) => {
+    alert(`${error}`);
+  });
+}
 
 
 
