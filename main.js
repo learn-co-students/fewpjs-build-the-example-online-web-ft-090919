@@ -2,9 +2,32 @@
 const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
-// Your JavaScript code goes here!
+let shapes = {
+  "♡": "♥",
+  "♥": "♡"
+};
 
+const hearts = document.getElementsByClassName("like-glyph")
 
+function likeFunction(e) {
+  const heart = e.target;
+  mimicServerCall("url")
+  .then(msg => {
+      heart.innerText = shapes[heart.innerText];
+      heart.classList.contains("activated-heart") ? heart.classList.remove("activated-heart") : heart.classList.add("activated-heart"); 
+    })
+  .catch(error => {
+    document.getElementById("modal").className = "";
+    document.getElementById("modal-message").innerText = error.message;
+    setTimeout(function(){
+      document.getElementById("modal").className = "hidden";
+    }, 3000);
+  })
+}
+
+for (const heart of hearts) {
+  heart.addEventListener("click", likeFunction);
+}
 
 
 //------------------------------------------------------------------------------
