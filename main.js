@@ -4,8 +4,32 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+let onOff = {
+  '♡': '♥',
+  '♥': '♡'
+};
 
+const hearts = document.getElementsByClassName('like-glyph')
 
+function acivateLike(event){
+  const heart = event.target;
+  mimicServerCall("url")
+  .then(msg => {
+    heart.innerText = onOff[heart.innerText];
+    heart.classList.contains("activated-heart") ? heart.classList.remove("activated-heart") : heart.classList.add("activated-heart");
+  })
+  .catch(error => {
+    document.getElementById("modal").className = "";
+    document.getElementById("modal-message").innerText = error.message;
+    setTimeout(function(){
+      document.getElementById("modal").className = "hidden";
+    }, 5000);
+  })
+}
+
+for (const heart of hearts) {
+  heart.addEventListener("click", acivateLike)
+}
 
 //------------------------------------------------------------------------------
 // Ignore after this point. Used only for demo purposes
